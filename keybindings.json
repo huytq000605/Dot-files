@@ -262,5 +262,9 @@
         },
         "when": "terminalFocus"
     },
+    {
+        "key": "ctrl+s",
+        "command": "workbench.action.files.save"
+    },
 
 ]
