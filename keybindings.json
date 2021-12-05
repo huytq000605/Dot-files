@@ -254,5 +254,13 @@
         "key": "shift+cmd+c",
         "command": "editor.action.clipboardCopyAction"
     },
+    {
+        "key": "cmd+c",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u0003"
+        },
+        "when": "terminalFocus"
+    },
 
 ]
