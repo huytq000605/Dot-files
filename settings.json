@@ -2,7 +2,6 @@
     "update.enableWindowsBackgroundUpdates": false,
     "update.mode": "manual",
     "workbench.view.alwaysShowHeaderActions": true,
-    "code-runner.runInTerminal": true,
     "editor.fontLigatures": false,
     "editor.fontSize": 16,
     "workbench.editor.enablePreview": true,
@@ -26,7 +25,7 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.minimap.enabled": false,
+   "editor.minimap.enabled": false,
     "bracket-pair-colorizer-2.colors": [
         "Gold",
         "Orchid",
@@ -36,7 +35,6 @@
         "DarkOrange",
         "Cornsilk"
     ],
-    "settingsSync.keybindingsPerPlatform": false,
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -131,7 +129,7 @@
         "<C-space>": false
     },
     "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.json-language-features"
     },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -141,7 +139,7 @@
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter.notebook.ipynb"
     },
-    "editor.tabSize": 4,
+    "editor.tabSize": 2,
     "editor.insertSpaces": false,
     "editor.lineNumbers": "relative",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
@@ -161,6 +159,43 @@
         }
     },
     "terminal.integrated.fontFamily": "MesloLGS NF",
-    "workbench.colorTheme": "GitHub Dark Default",
-    "editor.guides.bracketPairs": true
-}
+    "workbench.colorTheme": "Moonlight II",
+    "editor.guides.bracketPairs": true,
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim",
+    "settingsSync.keybindingsPerPlatform": false,
+    "vim.argumentObjectSeparators": [
+        ",",
+        ".",
+        "\"",
+        "/",
+        "\\",
+        "(",
+        ")",
+        "'",
+        ":",
+        ";",
+        "<",
+        ">",
+        "~",
+        "!",
+        "@",
+        "#",
+        "$",
+        "%",
+        "^",
+        "&",
+        "*",
+        "|",
+        "+",
+        "=",
+        "[",
+        "]",
+        "{",
+        "}",
+        "`",
+        "?",
+        "-"
+    ]
+} 

@@ -13,6 +13,7 @@ set expandtab
 set autoindent
 set smartindent
 
+
 call plug#begin()
 if exists('g:vscode')
 	" VSCode extension
@@ -22,6 +23,7 @@ else
     Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
 endif
+
 
 
 " use normal easymotion when in vim mode
@@ -41,7 +43,7 @@ else
 		"lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
 		"autocmd BufEnter * lua require'completion'.on_attach()
 
-		" Use <Tab> and <S-Tab> to navigate through popup menu
+		" Use <Tab> and <S-Tab> to nvgate through popup menu
 "		inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 "		inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "
@@ -77,6 +79,7 @@ nnoremap d "_d
 vnoremap d "_d
 nnoremap c "_c
 vnoremap c "_c
+vnoremap p "_dP
 
 nnoremap Q <Nop>
 inoremap <c-a> <Nop>
@@ -98,3 +101,9 @@ vnoremap K :m '<-2<CR>gv=gv
 " begin and end on line
 nnoremap B ^
 nnoremap E $
+vnoremap E $
+vnoremap B ^
+
+lua<<EOF
+require'nvim-tree'.setup {}
+EOF
