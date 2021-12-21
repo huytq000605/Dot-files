@@ -3,15 +3,22 @@ function! Cond(cond, ...)
 	return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
+set nocompatible
+set showmatch
+set ignorecase
 set encoding=UTF-8
 set relativenumber
 set number
+set wildmode=longest,list
 syntax on 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set autoindent
 set smartindent
+set cc=80
+filetype plugin indent on
 
 
 call plug#begin()
@@ -40,10 +47,10 @@ else
         "lua require('callbacks')
 
 	" Neo-vim LSP config
-		"lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
+		"lua require'lspconfig'.gopls.setup{on_attac=require'completion'.on_attach}
 		"autocmd BufEnter * lua require'completion'.on_attach()
 
-		" Use <Tab> and <S-Tab> to nvgate through popup menu
+		" Use <Tab> and <S-Tab> to navgate through popup menu
 "		inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 "		inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "
@@ -98,11 +105,21 @@ inoremap ? ?<c-g>u
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-" begin and end on line
+" begin and end on line in normal, visual, operation
 nnoremap B ^
+vnoremap B ^
+onoremap B ^
 nnoremap E $
 vnoremap E $
-vnoremap B ^
+onoremap E $
+
+nnoremap p ]p
+
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+tnoremap <Esc> <C-\><C-n>
 
 lua<<EOF
 require'nvim-tree'.setup {}

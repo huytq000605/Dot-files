@@ -48,15 +48,6 @@
     },
     {
         "key": "ctrl+q",
-        "command": "-workbench.action.quickOpenView"
-    },
-    {
-        "key": "ctrl+q",
-        "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
-        "when": "inQuickOpen && inViewsPicker"
-    },
-    {
-        "key": "ctrl+q",
         "command": "-workbench.action.quit"
     },
     {
@@ -154,11 +145,6 @@
     {
         "key": "alt+2",
         "command": "-workbench.action.openEditorAtIndex2"
-    },
-    {
-        "key": "ctrl+q",
-        "command": "workbench.view.explorer",
-        "when": "viewContainer.workbench.view.explorer.enabled"
     },
     {
         "key": "ctrl+shift+e",
@@ -287,7 +273,7 @@
     },
     {
         "key": "cmd+v",
-        "command": "-extension.vim_cmd+v",
+        "command": "-extension.vim_cmd+v"
     },
     {
         "key": "cmd+v",
@@ -441,5 +427,57 @@
         "key": "ctrl+shift+down",
         "command": "-notebook.cell.moveDown",
         "when": "notebookEditorFocused && !inputFocus"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.view.explorer"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "explorerViewletVisible"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.toggleSidebarVisibility",
+        "when": "explorerViewletVisible"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-cursorUp",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-list.focusUp",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-showPrevParameterHint",
+        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen"
     }
 ] 
