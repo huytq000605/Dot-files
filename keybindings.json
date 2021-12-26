@@ -32,7 +32,7 @@
     },
     {
         "key": "alt+x",
-       "command": "editor.action.toggleWordWrap"
+        "command": "editor.action.toggleWordWrap"
     },
     {
         "key": "alt+z",
@@ -273,7 +273,7 @@
     },
     {
         "key": "cmd+v",
-        "command": "-extension.vim_cmd+v"
+        "command": "-extension.vim_cmd+v",
     },
     {
         "key": "cmd+v",
@@ -480,4 +480,4 @@
         "key": "ctrl+p",
         "command": "workbench.action.quickOpen"
     }
-] 
+]

@@ -25,7 +25,7 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-   "editor.minimap.enabled": false,
+    "editor.minimap.enabled": false,
     "bracket-pair-colorizer-2.colors": [
         "Gold",
         "Orchid",
@@ -45,7 +45,6 @@
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    // "terminal.integrated.fontFamily": "monospace",
     "indentRainbow.colors": [
         "rgba(255,255,64,0.04)",
         "rgba(127,255,127,0.04)",
@@ -119,7 +118,7 @@
         }
 
     ],
-    // "vim.leader": "<space>",
+    "vim.leader": "<space>",
     "vim.handleKeys": {
         "<C-a>": false,
         "<C-y>": false,
@@ -197,5 +196,15 @@
         "`",
         "?",
         "-"
-    ]
-} 
+    ],
+    "ruby.codeCompletion": "rcodetools",
+    "ruby.intellisense": "rubyLocate",
+    "ruby.useLanguageServer": true,
+    "ruby.useBundler": true,
+    "ruby.lint": {
+        "rubocop": {
+            "useBundler": true
+        }
+    },
+    "ruby.format": "rubocop"
+}

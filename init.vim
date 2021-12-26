@@ -17,7 +17,8 @@ set shiftwidth=2
 set expandtab
 set autoindent
 set smartindent
-set cc=80
+set mouse=a
+"set cc=80
 filetype plugin indent on
 
 
@@ -26,7 +27,7 @@ if exists('g:vscode')
 	" VSCode extension
 else
 	" ordinary neovim
-	Plug 'shaunsingh/moonlight.nvim'
+    Plug 'shaunsingh/moonlight.nvim'
     Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
 endif
@@ -47,7 +48,7 @@ else
         "lua require('callbacks')
 
 	" Neo-vim LSP config
-		"lua require'lspconfig'.gopls.setup{on_attac=require'completion'.on_attach}
+		"lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
 		"autocmd BufEnter * lua require'completion'.on_attach()
 
 		" Use <Tab> and <S-Tab> to navgate through popup menu
@@ -62,7 +63,7 @@ else
 
 	" Tree
     nnoremap <C-q> :NvimTreeToggle<CR>
-    "nnoremap <leader>r :NvimTreeRefresh<CR>
+    nnoremap <leader>r :NvimTreeRefresh<CR>
     "nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
@@ -121,6 +122,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 tnoremap <Esc> <C-\><C-n>
 
+nnoremap <space> <Nop>
+let mapleader =" "
+
 lua<<EOF
 require'nvim-tree'.setup {}
+require'nvim-tree.view'.View.winopts.relativenumber = true
 EOF
