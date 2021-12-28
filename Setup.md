@@ -19,7 +19,14 @@ Dim brightness
 
 Gnome-tweaks
 
+
 ![](assets/extensions.png)
+
+# MacOS
+
+- Karabiner
+![](assets/mac_os_keyboard.png)
+![](assets/shortcut.png)
 
 # Shell
 
@@ -37,6 +44,8 @@ Add config file (kitty.conf) to ~/.config/kitty/
 
 
 # Editor
+Setup Nvim
+
 Download nvim.appimage
 
 Put somewhere ( ex: ~/ ), create symbolink in /usr/bin/nvim by:
@@ -44,10 +53,7 @@ Put somewhere ( ex: ~/ ), create symbolink in /usr/bin/nvim by:
 ln -s ~/nvim.appimage /usr/bin/nvim
 ```
 
-Install Plug:
-```
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' 
-```
+Install Vim Plug:
 
 Create config folder in ~/.config/nvim by: 
 ```
