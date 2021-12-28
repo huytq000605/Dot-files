@@ -1,8 +1,3 @@
-function! Cond(cond, ...)
-	let opts = get(a:000, 0, {})
-	return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
-
 set nocompatible
 set showmatch
 set ignorecase
@@ -24,20 +19,24 @@ filetype plugin indent on
 
 call plug#begin()
 if exists('g:vscode')
-	" VSCode extension
+  Plug 'asvetliakov/vim-easymotion', { 'as': 'vsc-easymotion' }
+  " VSCode extension
 else
-	" ordinary neovim
-    Plug 'shaunsingh/moonlight.nvim'
-    Plug 'kyazdani42/nvim-web-devicons' " for file icons
-    Plug 'kyazdani42/nvim-tree.lua'
+  " ordinary neovim
+  Plug 'shaunsingh/moonlight.nvim'
+  Plug 'kyazdani42/nvim-web-devicons' " for file icons
+  Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'neovim/nvim-lspconfig'
 endif
 
 
 
 " use normal easymotion when in vim mode
-Plug 'easymotion/vim-easymotion', Cond(!exists('g:vscode'))
 " use vscode easymotion when in vscode mode
-Plug 'asvetliakov/vim-easymotion', Cond(exists('g:vscode'), { 'as': 'vsc-easymotion' })
 call plug#end()
 
 colorscheme moonlight
@@ -45,32 +44,37 @@ colorscheme moonlight
 if exists('g:vscode')
 
 else
-        "lua require('callbacks')
+  "lua require('callbacks')
 
-	" Neo-vim LSP config
-		"lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-		"autocmd BufEnter * lua require'completion'.on_attach()
+  " Neo-vim LSP config
+  "lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
+  "autocmd BufEnter * lua require'completion'.on_attach()
 
-		" Use <Tab> and <S-Tab> to navgate through popup menu
-"		inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-"		inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"
-"		" Set completeopt to have a better completion experience
-"		set completeopt=menuone,noinsert,noselect
-"
-"		" Avoid showing message extra message when using completion
-"		set shortmess+=c
+  " Use <Tab> and <S-Tab> to navgate through popup menu
+  "		inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  "		inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  "
+  "		" Set completeopt to have a better completion experience
+  "		set completeopt=menuone,noinsert,noselect
+  "
+  "		" Avoid showing message extra message when using completion
+  "		set shortmess+=c
 
-	" Tree
-    nnoremap <C-q> :NvimTreeToggle<CR>
-    nnoremap <leader>r :NvimTreeRefresh<CR>
-    "nnoremap <leader>n :NvimTreeFindFile<CR>
-" NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
+  " Tree
+  nnoremap <C-q> :NvimTreeToggle<CR>
+  nnoremap <leader>r :NvimTreeRefresh<CR>
+  nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+  nnoremap <S-p> <cmd>lua require('telescope.builtin').live_grep()<cr>
+  nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<cr>
+  nnoremap , <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+  "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+  "nnoremap <leader>n :NvimTreeFindFile<CR>
+  " NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
-set termguicolors " this variable must be enabled for colors to be applied properly
+  set termguicolors " this variable must be enabled for colors to be applied properly
 
 
-    "
+  "
 endif
 
 let g:go_highlight_functions = 1
@@ -93,9 +97,17 @@ nnoremap Q <Nop>
 inoremap <c-a> <Nop>
 
 " When press next move to center screen
+nnoremap j jzz
+nnoremap k kzz
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap J mzJ`z
+nnoremap G Gzz
+nnoremap gg ggzz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-y> <C-y>zz
+
+nnoremap p ]p
 
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
@@ -114,18 +126,71 @@ nnoremap E $
 vnoremap E $
 onoremap E $
 
-nnoremap p ]p
-
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 tnoremap <Esc> <C-\><C-n>
 
+
 nnoremap <space> <Nop>
+nnoremap <c-space> <Nop>
 let mapleader =" "
 
 lua<<EOF
 require'nvim-tree'.setup {}
 require'nvim-tree.view'.View.winopts.relativenumber = true
+
+require'lspconfig'.solargraph.setup{}
+EOF
+
+lua<<EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  -- buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<c-space>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  --[[
+  buf_set_keymap('n', '<c-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  --]]
+
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'solargraph'}
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 EOF
