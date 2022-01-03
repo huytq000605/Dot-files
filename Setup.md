@@ -11,6 +11,8 @@ Copy a screenshot of an area to clipboard : Super + Shift + S
 
 Move to Work Space Above / Below : Disabled
 
+Universal Access => Typing => Repeat Keys
+
 Vietnamese: Ibamboo
 
 Turnoff Mouse acceleration
