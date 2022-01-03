@@ -44,16 +44,6 @@ colorscheme moonlight
 if exists('g:vscode')
 
 else
-  "lua require('callbacks')
-
-  " Neo-vim LSP config
-  "lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-  "autocmd BufEnter * lua require'completion'.on_attach()
-
-  " Use <Tab> and <S-Tab> to navgate through popup menu
-  "		inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  "		inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  "
   "		" Set completeopt to have a better completion experience
   "		set completeopt=menuone,noinsert,noselect
   "
@@ -63,16 +53,18 @@ else
   " Tree
   nnoremap <C-q> :NvimTreeToggle<CR>
   nnoremap <leader>r :NvimTreeRefresh<CR>
-  nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
-  nnoremap <S-p> <cmd>lua require('telescope.builtin').live_grep()<cr>
-  nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<cr>
-  nnoremap , <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
-  "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
   "nnoremap <leader>n :NvimTreeFindFile<CR>
   " NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
   set termguicolors " this variable must be enabled for colors to be applied properly
 
+  " Telescope
+  nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+  nnoremap <S-p> <cmd>lua require('telescope.builtin').live_grep()<cr>
+  nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<cr>
+  nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+  nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+  "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
   "
 endif
@@ -141,11 +133,11 @@ lua<<EOF
 require'nvim-tree'.setup {}
 require'nvim-tree.view'.View.winopts.relativenumber = true
 
-require'lspconfig'.solargraph.setup{}
 EOF
 
 lua<<EOF
 local nvim_lsp = require('lspconfig')
+require'lspconfig'.solargraph.setup{}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -160,8 +152,8 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  -- buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  --buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  --buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', '<c-space>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
@@ -184,7 +176,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'solargraph'}
+local servers = {'solargraph'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
