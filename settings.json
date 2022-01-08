@@ -24,7 +24,7 @@
     "explorer.autoReveal": false,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
+   },
     "editor.minimap.enabled": false,
     "bracket-pair-colorizer-2.colors": [
         "Gold",
@@ -131,6 +131,14 @@
         {
             "before": ["N"],
             "after": ["N", "z", "z"]
+        },
+        {
+            "before": ["u"],
+            "commands": ["undo"]
+        },
+        {
+            "before": ["C-r"],
+            "commands": ["redo"]
         }
 
     ],
@@ -161,6 +169,12 @@
         }
 
     ],
+    // "vim.commandLineModeKeyBindingsNonRecursive": [
+    //     {
+    //         "before": ["<C-\\>", "<C-n>"],
+    //         "after": ["Esc"]
+    //     }
+    // ],
     // "vim.leader": "<space>",
     "vim.handleKeys": {
         "<C-a>": false,
@@ -206,4 +220,4 @@
     "python.defaultInterpreterPath": "/usr/bin/python3",
     "vim.vimrc.enable": true,
     "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim"
-}
+} 

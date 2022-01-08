@@ -32,7 +32,7 @@
     },
     {
         "key": "alt+x",
-        "command": "editor.action.toggleWordWrap"
+       "command": "editor.action.toggleWordWrap"
     },
     {
         "key": "alt+z",
@@ -367,7 +367,7 @@
         "when": "textInputFocus"
     },
     {
-        "key": "alt+right",
+        "key": "ctrl+l",
         "command": "workbench.action.moveEditorToNextGroup"
     },
     {
@@ -375,7 +375,7 @@
         "command": "-workbench.action.moveEditorToNextGroup"
     },
     {
-        "key": "alt+left",
+        "key": "ctrl+h",
         "command": "workbench.action.moveEditorToPreviousGroup"
     },
     {
@@ -383,11 +383,11 @@
         "command": "-workbench.action.moveEditorToPreviousGroup"
     },
     {
-        "key": "alt+left",
+        "key": "ctr+h",
         "command": "workbench.action.navigateLeft"
     },
     {
-        "key": "alt+right",
+        "key": "ctrl+l",
         "command": "workbench.action.navigateRight"
     },
     {
@@ -480,4 +480,4 @@
         "key": "ctrl+p",
         "command": "workbench.action.quickOpen"
     }
-]
+] 

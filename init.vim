@@ -13,8 +13,10 @@ set expandtab
 set autoindent
 set smartindent
 set mouse=a
+set incsearch
 "set cc=80
 filetype plugin indent on
+let mapleader =" "
 
 
 call plug#begin()
@@ -45,7 +47,7 @@ if exists('g:vscode')
 
 else
   "		" Set completeopt to have a better completion experience
-  "		set completeopt=menuone,noinsert,noselect
+  "		set competeopt=menuone,noinsert,noselect
   "
   "		" Avoid showing message extra message when using completion
   "		set shortmess+=c
@@ -60,7 +62,7 @@ else
 
   " Telescope
   nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
-  nnoremap <S-p> <cmd>lua require('telescope.builtin').live_grep()<cr>
+  nnoremap <leader>p <cmd>lua require('telescope.builtin').live_grep()<cr>
   nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<cr>
   nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
   nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
@@ -127,7 +129,6 @@ tnoremap <Esc> <C-\><C-n>
 
 nnoremap <space> <Nop>
 nnoremap <c-space> <Nop>
-let mapleader =" "
 
 lua<<EOF
 require'nvim-tree'.setup {}
