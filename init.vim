@@ -1,12 +1,14 @@
-set nocompatible
 set showmatch
+set hlsearch
 set ignorecase
+set smartcase
+set showcmd
+set showmode
 set encoding=UTF-8
 set relativenumber
 set number
 set wildmode=longest,list
 syntax on 
-set tabstop=2
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -16,6 +18,11 @@ set mouse=a
 set incsearch
 "set cc=80
 filetype plugin indent on
+set so=999
+set cursorline
+set nowrap
+set ai
+set termguicolors
 let mapleader =" "
 
 
@@ -47,7 +54,7 @@ if exists('g:vscode')
 
 else
   "		" Set completeopt to have a better completion experience
-  "		set competeopt=menuone,noinsert,noselect
+  "		set completeopt=menuone,noinsert,noselect
   "
   "		" Avoid showing message extra message when using completion
   "		set shortmess+=c
@@ -91,17 +98,15 @@ nnoremap Q <Nop>
 inoremap <c-a> <Nop>
 
 " When press next move to center screen
-nnoremap j jzz
-nnoremap k kzz
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap J mzJ`z
-nnoremap G Gzz
-nnoremap gg ggzz
-nnoremap <C-d> <C-d>zz
-nnoremap <C-y> <C-y>zz
-
-nnoremap p ]p
+" nnoremap j jzz
+" nnoremap k kzz
+" nnoremap n nzz
+" nnoremap N Nzz
+" nnoremap J mzJ`z
+" nnoremap G Gzz
+" nnoremap gg ggzz
+" nnoremap <C-d> <C-d>zz
+" nnoremap <C-y> <C-y>zz
 
 inoremap , ,<c-g>u
 inoremap . .<c-g>u

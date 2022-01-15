@@ -24,7 +24,7 @@
     "explorer.autoReveal": false,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-   },
+    },
     "editor.minimap.enabled": false,
     "bracket-pair-colorizer-2.colors": [
         "Gold",
@@ -198,6 +198,7 @@
     "editor.tabSize": 2,
     "editor.insertSpaces": false,
     "editor.lineNumbers": "relative",
+    "editor.cursorSurroundingLines": 999,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
     "vscode-neovim.neovimExecutablePaths.linux": "/home/huytq/nvim.appimage",
     // "vim.enableNeovim": true,
@@ -219,5 +220,5 @@
     "editor.guides.bracketPairs": true,
     "python.defaultInterpreterPath": "/usr/bin/python3",
     "vim.vimrc.enable": true,
-    "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim"
-} 
+    "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim",
+}

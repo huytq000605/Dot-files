@@ -115,15 +115,34 @@ source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Add RVM to PATH for scripting.
 export PATH="$PATH:$HOME/.rvm/bin"
-export NVM_DIR="$HOME/.nvm"
 
+### NVM && Lazy load
+
+#export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-# Change to lazy load
 lazy_load_nvm() {
-  unset -f node
-  export NVM_DIR=~/.nvm
-  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+ unset -f node
+ unset -f yarn
+ unset -f npm
+ export NVM_DIR=~/.nvm
+ [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
 }
+
+node() {
+ lazy_load_nvm
+ node $@
+}
+
+yarn() {
+  lazy_load_nvm
+  yarn $@
+}
+
+npm() {
+  lazy_load_nvm
+  npm $@
+}
+###
 
 node() {
   lazy_load_nvm
