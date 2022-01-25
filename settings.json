@@ -175,7 +175,7 @@
     //         "after": ["Esc"]
     //     }
     // ],
-    // "vim.leader": "<space>",
+    "vim.leader": " ",
     "vim.handleKeys": {
         "<C-a>": false,
         "<C-y>": false,
@@ -201,10 +201,10 @@
     "editor.cursorSurroundingLines": 999,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
     "vscode-neovim.neovimExecutablePaths.linux": "/home/huytq/nvim.appimage",
-    // "vim.enableNeovim": true,
-    // "vim.neovimPath": "/home/huytq/nvim.appimage",
+    "vim.enableNeovim": true,
+    // "vim.neovimPath": "/usr/local/bin/nvim",
     // "vim.neovimConfigPath": "/home/huytq/.config/nvim/init.vim",
-    // "vim.neovimUseConfigFile": true,
+    "vim.neovimUseConfigFile": true,
     "workbench.list.automaticKeyboardNavigation": false,
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.profiles.linux": {
@@ -219,6 +219,7 @@
     "workbench.colorTheme": "Moonlight II",
     "editor.guides.bracketPairs": true,
     "python.defaultInterpreterPath": "/usr/bin/python3",
-    "vim.vimrc.enable": true,
-    "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim",
+    // "vim.vimrc.enable": true,
+    // "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim",
+    "errorLens.excludePatterns": ["**/*.rb"]
 }

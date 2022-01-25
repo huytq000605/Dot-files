@@ -23,6 +23,7 @@ set cursorline
 set nowrap
 set ai
 set termguicolors
+"set inccommand=split
 let mapleader =" "
 
 
