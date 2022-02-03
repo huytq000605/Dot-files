@@ -136,6 +136,14 @@ tnoremap <Esc> <C-\><C-n>
 
 nnoremap <space> <Nop>
 nnoremap <c-space> <Nop>
+" nnoremap ˙ gt
+" nnoremap ¬ gT
+" nnoremap <A-l> gt
+" nnoremap <A-h> gT
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+nnoremap <C-[> :-tabmove<cr>
+nnoremap <C-]> :+tabmove<cr>
 
 lua<<EOF
 require'nvim-tree'.setup {}
