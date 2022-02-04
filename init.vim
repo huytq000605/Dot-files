@@ -140,8 +140,6 @@ nnoremap <c-space> <Nop>
 " nnoremap ¬ gT
 " nnoremap <A-l> gt
 " nnoremap <A-h> gT
-nnoremap <C-l> gt
-nnoremap <C-h> gT
 nnoremap <C-[> :-tabmove<cr>
 nnoremap <C-]> :+tabmove<cr>
 
