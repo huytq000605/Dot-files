@@ -32,7 +32,7 @@
     },
     {
         "key": "alt+x",
-       "command": "editor.action.toggleWordWrap"
+        "command": "editor.action.toggleWordWrap"
     },
     {
         "key": "alt+z",
@@ -273,7 +273,7 @@
     },
     {
         "key": "cmd+v",
-        "command": "-extension.vim_cmd+v",
+        "command": "-extension.vim_cmd+v"
     },
     {
         "key": "cmd+v",
@@ -367,28 +367,8 @@
         "when": "textInputFocus"
     },
     {
-        "key": "ctrl+l",
-        "command": "workbench.action.moveEditorToNextGroup"
-    },
-    {
         "key": "ctrl+cmd+right",
         "command": "-workbench.action.moveEditorToNextGroup"
-    },
-    {
-        "key": "ctrl+h",
-        "command": "workbench.action.moveEditorToPreviousGroup"
-    },
-    {
-        "key": "ctrl+cmd+left",
-        "command": "-workbench.action.moveEditorToPreviousGroup"
-    },
-    {
-        "key": "ctr+h",
-        "command": "workbench.action.navigateLeft"
-    },
-    {
-        "key": "ctrl+l",
-        "command": "workbench.action.navigateRight"
     },
     {
         "key": "alt+up",
@@ -430,16 +410,7 @@
     },
     {
         "key": "ctrl+q",
-        "command": "workbench.view.explorer"
-    },
-    {
-        "key": "ctrl+q",
         "command": "-workbench.view.explorer"
-    },
-    {
-        "key": "ctrl+q",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "explorerViewletVisible"
     },
     {
         "key": "ctrl+q",
@@ -479,5 +450,27 @@
     {
         "key": "ctrl+p",
         "command": "workbench.action.quickOpen"
+    },
+    {
+      "key": "ctrl+h",
+      "command": "workbench.action.focusPreviousGroup"
+    },
+    {
+      "key": "ctrl+l",
+      "command": "workbench.action.focusNextGroup"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenView"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "shift+cmd+e",
+        "command": "-workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
     }
-] 
+]

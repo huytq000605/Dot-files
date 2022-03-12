@@ -139,8 +139,25 @@
         {
             "before": ["C-r"],
             "commands": ["redo"]
+        },
+        {
+            "before": ["E"],
+            "after": ["$"]
+        },
+        {
+            "before": ["B"],
+            "after": ["^"]
         }
-
+    ],
+    "vim.operatorPendingModeKeyBindingsNonRecursive": [
+        {
+            "before": ["E"],
+            "after": ["$"]
+        },
+        {
+            "before": ["B"],
+            "after": ["^"]
+        }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
@@ -166,6 +183,18 @@
         {
             "before": ["K"],
             "commands": ["editor.action.moveLinesUpAction"]
+        },
+        {
+            "before": ["E"],
+            "after": ["$"]
+        },
+        {
+            "before": ["B"],
+            "after": ["^"]
+        },
+        {
+            "before": ["p"],
+            "after": ["\"", "_", "d", "P"]
         }
 
     ],
