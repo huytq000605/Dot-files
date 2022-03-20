@@ -40,6 +40,8 @@ Gnome-tweaks
 
 - Install Fzf
 
+- Install Ripgrep
+
 - Install Kitty (Terminal):
 
 Add config file (kitty.conf) to ~/.config/kitty/
