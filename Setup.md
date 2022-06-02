@@ -45,6 +45,8 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
 - Install Fzf
 
+- Install Ripgrep
+
 - Install Kitty (Terminal):
 
 Add config file (kitty.conf) to ~/.config/kitty/
