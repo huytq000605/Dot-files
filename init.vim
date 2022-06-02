@@ -18,7 +18,6 @@ set mouse=a
 set incsearch
 "set cc=80
 filetype plugin indent on
-set so=999
 set cursorline
 set nowrap
 set ai
@@ -146,7 +145,6 @@ nnoremap <C-]> :+tabmove<cr>
 lua<<EOF
 require'nvim-tree'.setup {}
 require'nvim-tree.view'.View.winopts.relativenumber = true
-
 EOF
 
 lua<<EOF

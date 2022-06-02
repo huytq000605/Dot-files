@@ -273,7 +273,7 @@
     },
     {
         "key": "cmd+v",
-        "command": "-extension.vim_cmd+v"
+        "command": "-extension.vim_cmd+v",
     },
     {
         "key": "cmd+v",
@@ -409,15 +409,6 @@
         "when": "notebookEditorFocused && !inputFocus"
     },
     {
-        "key": "ctrl+q",
-        "command": "-workbench.view.explorer"
-    },
-    {
-        "key": "ctrl+q",
-        "command": "-workbench.action.toggleSidebarVisibility",
-        "when": "explorerViewletVisible"
-    },
-    {
         "key": "ctrl+p",
         "command": "-cursorUp",
         "when": "textInputFocus"
@@ -469,8 +460,17 @@
         "when": "viewContainer.workbench.view.explorer.enabled"
     },
     {
-        "key": "shift+cmd+e",
-        "command": "-workbench.view.explorer",
-        "when": "viewContainer.workbench.view.explorer.enabled"
+        "key": "ctrl+shift+]",
+        "command": "moveActiveEditor",
+        "args": {
+            "to": "right"
+        }
+    },
+    {
+        "key": "ctrl+shift+[",
+        "command": "moveActiveEditor",
+        "args": {
+            "to": "left"
+        }
     }
 ]
