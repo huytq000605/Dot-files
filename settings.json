@@ -82,7 +82,6 @@
     },
     "terminal.integrated.scrollback": 1000,
     "editor.wordWrap": "on",
-    "diffEditor.ignoreTrimWhitespace": false,
     "prettier.tabWidth": 4,
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -227,7 +226,7 @@
     "editor.tabSize": 2,
     "editor.insertSpaces": false,
     "editor.lineNumbers": "relative",
-    "editor.cursorSurroundingLines": 999,
+    // "editor.cursorSurroundingLines": 999,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
     "vscode-neovim.neovimExecutablePaths.linux": "/home/huytq/nvim.appimage",
     "vim.enableNeovim": true,
@@ -250,5 +249,10 @@
     "python.defaultInterpreterPath": "/usr/bin/python3",
     // "vim.vimrc.enable": true,
     // "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim",
-    "errorLens.excludePatterns": ["**/*.rb"]
+    "errorLens.excludePatterns": [
+        "**/*.rb"
+    ],
+    "gitlens.defaultDateStyle": "absolute",
+    "gitlens.defaultDateFormat": null,
+    // "editor.renderWhitespace": "all",
 }
