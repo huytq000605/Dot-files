@@ -24,7 +24,8 @@ set ai
 set termguicolors
 "set inccommand=split
 let mapleader =" "
-
+set list
+set listchars=eol:⏎,trail:⎵
 
 call plug#begin()
 if exists('g:vscode')
@@ -41,6 +42,7 @@ else
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
+  Plug 'jiangmiao/auto-pairs'
 endif
 
 
