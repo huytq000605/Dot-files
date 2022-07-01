@@ -19,7 +19,7 @@ set incsearch
 "set cc=80
 filetype plugin indent on
 set cursorline
-set nowrap
+set wrap
 set ai
 set termguicolors
 "set inccommand=split
