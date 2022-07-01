@@ -40,7 +40,8 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 12
 - Install ZSH
 
 - Install Oh my ZSH
-
+- ZSH Syntax Highlighting https://github.com/zsh-users/zsh-syntax-highlighting
+- ZSH Auto suggestions https://github.com/zsh-users/zsh-autosuggestions
 - Install Powerlevel 10k Theme (Remember to install font)
 
 - Install Fzf
