@@ -200,3 +200,20 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
+
+" If using WSL, download win32yank and put in dir, then using these configs to sync buffer
+" let s:win32yank = '/usr/local/bin/win32yank.exe'
+" let g:clipboard = {
+"       \  'name' : 'wsl',
+"       \  'copy' : {
+"       \    '+' : s:win32yank..' -i --crlf',
+"       \    '*' : s:win32yank..' -i --crlf',
+"       \  },
+"       \  'paste' : {
+"       \    '+' : s:win32yank..' -o --lf',
+"       \    '*' : s:win32yank..' -o --lf',
+"       \  },
+"       \}
+" unlet s:win32yank
+
+
