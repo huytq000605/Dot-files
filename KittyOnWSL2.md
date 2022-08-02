@@ -43,7 +43,11 @@ OpenGL ES profile shading language version string: OpenGL ES GLSL ES 3.10
 ```
 3. Install Kitty
 4. Run VcXsrv on Window (Multiple windows, No client, not using native opengl, disable access control)
-5. add these to .zshrc
+5. You can make different config.xlaunch files, e.g. config1.xlaunch and starting in silencemode in commandline with:
+```
+Xlaunch.exe -run config.xlaunch
+```
+6. add these to .zshrc
 ```
 export LIBGL_ALWAYS_INDIRECT=0
 export DISPLAY=$(ip route list default | awk '{print $3}'):0
