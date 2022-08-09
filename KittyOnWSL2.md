@@ -54,8 +54,13 @@ export DISPLAY=$(ip route list default | awk '{print $3}'):0
 ```
 7. Setup batch file to open all things together
 ```
+@echo off
 start "VcXsrv" "C:\Program Files\VcXsrv\config.xlaunch"
 wsl -e zsh -lic "cd ~ ; kitty &"
+```
+Windows only allow to pin .exe files to start. So we create a shortcut as cmd
+```
+cmd /c "PATH_TO_BAT_FILE"
 ```
 8. Enjoy !!!
 
