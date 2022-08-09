@@ -52,6 +52,11 @@ Xlaunch.exe -run config.xlaunch
 export LIBGL_ALWAYS_INDIRECT=0
 export DISPLAY=$(ip route list default | awk '{print $3}'):0
 ```
-6. Run kitty
+7. Setup batch file to open all things together
+```
+start "VcXsrv" "C:\Program Files\VcXsrv\config.xlaunch"
+wsl -e zsh -lic "cd ~ ; kitty &"
+```
+8. Enjoy !!!
 
 
