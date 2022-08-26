@@ -34,7 +34,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 12
 ```
 ![](assets/mac_os_keyboard.png)
 ![](assets/shortcut.png)
-
+- Scroll Reverser (Touchpad)
 # Shell
 
 - Install ZSH
