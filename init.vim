@@ -25,6 +25,7 @@ set termguicolors
 "set inccommand=split
 let mapleader =" "
 set list
+set clipboard=unnamed
 set listchars=eol:⏎,trail:⎵
 
 call plug#begin()
