@@ -98,7 +98,7 @@
     },
     "vim.easymotion": true,
     "vim.incsearch": true,
-    "vim.useSystemClipboard": false,
+    "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
     "vim.normalModeKeyBindingsNonRecursive": [
@@ -220,9 +220,6 @@
     },
     "sync.gist": "54783fcfc153a368eefcf726ddc8ab82",
     "editor.bracketPairColorization.enabled": true,
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
-    },
     "editor.tabSize": 2,
     "editor.insertSpaces": false,
     "editor.lineNumbers": "relative",
@@ -249,10 +246,18 @@
     "python.defaultInterpreterPath": "/usr/bin/python3",
     // "vim.vimrc.enable": true,
     // "vim.vimrc.path": "/Users/huytq/.config/nvim/init.vim",
-    "errorLens.excludePatterns": [
-        "**/*.rb"
-    ],
     "gitlens.defaultDateStyle": "absolute",
     "gitlens.defaultDateFormat": null,
     // "editor.renderWhitespace": "all",
+    "go.testFlags": [
+        "-count=1"
+    ],
+    "gitlens.defaultDateLocale": null,
+    "git.mergeEditor": false,
+    "gitlens.gitCommands.skipConfirmations": [
+        "fetch:command",
+        "stash-push:command",
+        "switch:command",
+        "stash-apply:command"
+    ],
 }
