@@ -24,9 +24,7 @@ set ai
 set termguicolors
 "set inccommand=split
 let mapleader =" "
-set list
 set clipboard=unnamed
-set listchars=eol:⏎,trail:⎵
 
 call plug#begin()
 if exists('g:vscode')
@@ -152,7 +150,6 @@ EOF
 
 lua<<EOF
 local nvim_lsp = require('lspconfig')
-require'lspconfig'.solargraph.setup{}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -191,7 +188,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = {'solargraph'}
+local servers = {}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -216,5 +213,4 @@ EOF
 "       \  },
 "       \}
 " unlet s:win32yank
-
 
