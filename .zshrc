@@ -112,6 +112,13 @@ source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf auto suggestions quicker
+__git_files () { 
+    _wanted files expl 'local files' _files     
+}
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
 
 # Add RVM to PATH for scripting.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -149,3 +156,8 @@ node() {
   node $@
 }
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
+
+### GOPATH
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
