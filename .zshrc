@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git docker docker-compose zsh-syntax-highlighting zsh-autosuggestions ripgrep gitfast)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,11 +112,6 @@ source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# fzf auto suggestions quicker
-__git_files () { 
-    _wanted files expl 'local files' _files     
-}
-
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 
