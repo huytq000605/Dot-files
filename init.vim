@@ -34,7 +34,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 
 " auto start coq nvim
-let g:coq_settings = { 'auto_start': v:true }
+let g:coq_settings = { 'auto_start': v:true, 'keymap.jump_to_mark': v:null }
 
 call plug#begin()
 if exists('g:vscode')
@@ -45,7 +45,7 @@ else
   Plug 'shaunsingh/moonlight.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua'
-  Plug 'easymotion/vim-easymotion'
+  Plug 'phaazon/hop.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -68,7 +68,16 @@ else
   
 " Nvim Tree
 lua<<EOF
-require'nvim-tree'.setup {}
+local list = { 
+  { key = "s", action = "" } 
+}
+require'nvim-tree'.setup {
+  view = {
+    mappings = {
+      list = list
+    }
+  }
+}
 require'nvim-tree.view'.View.winopts.relativenumber = true
 EOF
 
@@ -80,12 +89,6 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 
 set termguicolors " this variable must be enabled for colors to be applied properly
 endif
-
-" Easy motion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-"map s <Plug>(easymotion-bd-w)
-nmap s <Plug>(easymotion-bd-f)
-""""""""""""""""""""""""""""""""""""""""""""""""
 
 "c and d dont use buffer register
 nnoremap x "_x
@@ -124,6 +127,15 @@ nnoremap <C-[> :-tabmove<cr>
 nnoremap <C-]> :+tabmove<cr>
 
 lua<<EOF
+
+-- Hop -------------------------------------------
+local hop = require('hop')
+hop.setup {keys = 'abcdefghijklmnopqrstuvwxyz'}
+local directions = require('hop.hint').HintDirection
+vim.keymap.set('n', 's', function()
+  hop.hint_char1({})
+end, {})
+-------------------------------------------------
 
 -- Telescope --------------------------------------
 local builtin = require('telescope.builtin')
