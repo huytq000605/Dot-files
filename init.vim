@@ -26,9 +26,15 @@ set termguicolors
 let mapleader =" "
 set clipboard=unnamed
 
+" rainbow color
 let g:rainbow_active = 1
+
+" highlight function golang
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
+
+" auto start coq nvim
+let g:coq_settings = { 'auto_start': v:true }
 
 call plug#begin()
 if exists('g:vscode')
