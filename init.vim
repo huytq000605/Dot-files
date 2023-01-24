@@ -41,10 +41,10 @@ else
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
-  Plug 'jiangmiao/auto-pairs'
+  Plug 'windwp/nvim-autopairs'
+  Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+  Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 endif
-
-
 
 " use normal easymotion when in vim mode
 " use vscode easymotion when in vscode mode
@@ -55,38 +55,38 @@ colorscheme moonlight
 if exists('g:vscode')
 
 else
-  "		" Set completeopt to have a better completion experience
-  "		set completeopt=menuone,noinsert,noselect
-  "
-  "		" Avoid showing message extra message when using completion
-  "		set shortmess+=c
+  
+" Nvim Tree
+lua<<EOF
+require'nvim-tree'.setup {}
+require'nvim-tree.view'.View.winopts.relativenumber = true
+EOF
 
-  " Tree
-  nnoremap <C-q> :NvimTreeToggle<CR>
-  nnoremap <leader>r :NvimTreeRefresh<CR>
-  "nnoremap <leader>n :NvimTreeFindFile<CR>
-  " NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
+nnoremap <C-q> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+"nnoremap <leader>n :NvimTreeFindFile<CR>
+" NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  set termguicolors " this variable must be enabled for colors to be applied properly
+set termguicolors " this variable must be enabled for colors to be applied properly
 
-  " Telescope
-  nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
-  nnoremap <leader>p <cmd>lua require('telescope.builtin').live_grep()<cr>
-  nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<cr>
-  nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
-  nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-  "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+" Telescope
+nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>p <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  "
+
 endif
 
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:rainbow_active = 1
+" Easy motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-"map  s <Plug>(easymotion-bd-w)
+"map s <Plug>(easymotion-bd-w)
 nmap s <Plug>(easymotion-bd-f)
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 "c and d dont use buffer register
 nnoremap x "_x
@@ -99,25 +99,10 @@ vnoremap p "_dP
 nnoremap Q <Nop>
 inoremap <c-a> <Nop>
 
-" When press next move to center screen
-" nnoremap j jzz
-" nnoremap k kzz
-" nnoremap n nzz
-" nnoremap N Nzz
-" nnoremap J mzJ`z
-" nnoremap G Gzz
-" nnoremap gg ggzz
-" nnoremap <C-d> <C-d>zz
-" nnoremap <C-y> <C-y>zz
-
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
-
-" move line up down in visual mode
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
 
 " begin and end on line in normal, visual, operation
 nnoremap B ^
@@ -136,65 +121,52 @@ tnoremap <Esc> <C-\><C-n>
 
 nnoremap <space> <Nop>
 nnoremap <c-space> <Nop>
-" nnoremap ˙ gt
-" nnoremap ¬ gT
-" nnoremap <A-l> gt
-" nnoremap <A-h> gT
 nnoremap <C-[> :-tabmove<cr>
 nnoremap <C-]> :+tabmove<cr>
 
 lua<<EOF
-require'nvim-tree'.setup {}
-require'nvim-tree.view'.View.winopts.relativenumber = true
-EOF
+let g:rainbow_active = 1
 
-lua<<EOF
-local nvim_lsp = require('lspconfig')
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
   -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
-
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  --buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  --buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<c-space>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  --[[
-  buf_set_keymap('n', '<c-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  --]]
-
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', '<c-space>', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = {}
+local servers = {"gopls"}
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+  require('lspconfig')[lsp].setup {
     on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
   }
 end
 EOF
@@ -213,4 +185,3 @@ EOF
 "       \  },
 "       \}
 " unlet s:win32yank
-
