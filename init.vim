@@ -26,6 +26,10 @@ set termguicolors
 let mapleader =" "
 set clipboard=unnamed
 
+let g:rainbow_active = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+
 call plug#begin()
 if exists('g:vscode')
   Plug 'asvetliakov/vim-easymotion', { 'as': 'vsc-easymotion' }
@@ -69,17 +73,6 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set termguicolors " this variable must be enabled for colors to be applied properly
-
-" Telescope
-nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>p <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
-nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 endif
 
 " Easy motion
@@ -125,8 +118,16 @@ nnoremap <C-[> :-tabmove<cr>
 nnoremap <C-]> :+tabmove<cr>
 
 lua<<EOF
-let g:rainbow_active = 1
 
+-- Telescope --------------------------------------
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<c-p>', builtin.find_files, {})
+vim.keymap.set('n', '<leader>p', builtin.live_grep, {})
+vim.keymap.set('n', '<c-b>', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+-----------------------------------------------------
+
+-- LSP ---------------------------------------------
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -162,13 +163,13 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {"gopls"}
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
   }
 end
+-- --------------------------------------------------------------------------------------
+
 EOF
 
 " If using WSL, download win32yank and put in dir, then using these configs to sync buffer
