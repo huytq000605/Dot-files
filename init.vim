@@ -143,6 +143,9 @@ nnoremap <C-[> :-tabmove<cr>
 nnoremap <C-]> :+tabmove<cr>
 
 lua<<EOF
+-- Autopairs -------------------------------------
+require("nvim-autopairs").setup {}
+--------------------------------------------------
 
 -- Hop -------------------------------------------
 local hop = require('hop')
