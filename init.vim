@@ -73,12 +73,28 @@ local list = {
 }
 require'nvim-tree'.setup {
   view = {
+    relativenumber = true,
     mappings = {
       list = list
     }
   }
 }
-require'nvim-tree.view'.View.winopts.relativenumber = true
+local function open_nvim_tree(data)
+
+  -- buffer is a directory
+  local directory = vim.fn.isdirectory(data.file) == 1
+
+  if not directory then
+    return
+  end
+
+  -- change to the directory
+  vim.cmd.cd(data.file)
+
+  -- open the tree
+  require("nvim-tree.api").tree.open()
+end
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 EOF
 
 nnoremap <C-q> :NvimTreeToggle<CR>
@@ -106,7 +122,7 @@ inoremap . .<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
 
-" begin and end on line in normal, visual, operation
+" begin and end on line in normal, visual, operation"
 nnoremap B ^
 vnoremap B ^
 onoremap B ^
