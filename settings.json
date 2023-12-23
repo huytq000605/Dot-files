@@ -1,5 +1,4 @@
 {
-    "update.enableWindowsBackgroundUpdates": false,
     "update.mode": "manual",
     "workbench.view.alwaysShowHeaderActions": true,
     "editor.fontLigatures": false,
@@ -26,49 +25,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.minimap.enabled": false,
-    "bracket-pair-colorizer-2.colors": [
-        "Gold",
-        "Orchid",
-        "LightSkyBlue",
-        "Salmon",
-        "LawnGreen",
-        "DarkOrange",
-        "Cornsilk"
-    ],
     "settingsSync.keybindingsPerPlatform": false,
-    "vim.argumentObjectSeparators": [
-        ",",
-        ".",
-        "\"",
-        "/",
-        "\\",
-        "(",
-        ")",
-        "'",
-        ":",
-        ";",
-        "<",
-        ">",
-        "~",
-        "!",
-        "@",
-        "#",
-        "$",
-        "%",
-        "^",
-        "&",
-        "*",
-        "|",
-        "+",
-        "=",
-        "[",
-        "]",
-        "{",
-        "}",
-        "`",
-        "?",
-        "-"
-    ],
     "ruby.codeCompletion": "rcodetools",
     "ruby.intellisense": "rubyLocate",
     "ruby.useLanguageServer": true,
@@ -176,14 +133,6 @@
             "after": ["n", "z", "z"]
         },
         {
-            "before": ["J"],
-            "commands": ["editor.action.moveLinesDownAction"]
-        },
-        {
-            "before": ["K"],
-            "commands": ["editor.action.moveLinesUpAction"]
-        },
-        {
             "before": ["E"],
             "after": ["$"]
         },
@@ -218,14 +167,13 @@
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "sync.gist": "54783fcfc153a368eefcf726ddc8ab82",
     "editor.bracketPairColorization.enabled": true,
     "editor.tabSize": 2,
     "editor.insertSpaces": false,
     "editor.lineNumbers": "relative",
     // "editor.cursorSurroundingLines": 999,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-    "vscode-neovim.neovimExecutablePaths.linux": "/home/huytq/nvim.appimage",
+    // "vscode-neovim.neovimExecutablePaths.linux": "/home/huytq/nvim.appimage",
     "vim.enableNeovim": true,
     // "vim.neovimPath": "/usr/local/bin/nvim",
     // "vim.neovimConfigPath": "/home/huytq/.config/nvim/init.vim",
@@ -249,9 +197,6 @@
     "gitlens.defaultDateStyle": "absolute",
     "gitlens.defaultDateFormat": null,
     // "editor.renderWhitespace": "all",
-    "go.testFlags": [
-        "-count=1"
-    ],
     "gitlens.defaultDateLocale": null,
     "git.mergeEditor": false,
     "gitlens.gitCommands.skipConfirmations": [
@@ -260,4 +205,19 @@
         "switch:command",
         "stash-apply:command"
     ],
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "go.buildFlags": [
+        "-tags=unit,integration"
+    ],
+    "go.testFlags": [
+        "-count=1",
+        "-tags=unit,integration"
+    ],
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1,
+        "asvetliakov.vscode-neovim": 1
+    },
 }
+
