@@ -146,10 +146,6 @@ npm() {
 }
 ###
 
-node() {
-  lazy_load_nvm
-  node $@
-}
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 
 ### GOPATH
