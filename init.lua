@@ -97,7 +97,9 @@ plugins = {
       end, {})
     end
     },
-    'nvim-telescope/telescope.nvim',
+    { 'nvim-telescope/telescope.nvim', 
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
     {'nvim-telescope/telescope-fzf-native.nvim', build = function() vim.fn['make']() end},
     {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
     'neovim/nvim-lspconfig',
