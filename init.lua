@@ -75,8 +75,7 @@ plugins = {
     -- VSCode extension check
     {'asvetliakov/vim-easymotion'},
     'shaunsingh/moonlight.nvim',
-    {
-     'nvim-tree/nvim-tree.lua', 
+    {'nvim-tree/nvim-tree.lua', 
       version = "*", 
       lazy = false, 
       dependencies = {"nvim-tree/nvim-web-devicons"},
@@ -98,9 +97,23 @@ plugins = {
     end
     },
     { 'nvim-telescope/telescope.nvim', 
-      dependencies = { 'nvim-lua/plenary.nvim' }
+      dependencies = { 
+        "nvim-lua/plenary.nvim",
+        -- If getting error, :Lazy to check installation path
+        -- Manually "make" there
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        "nvim-tree/nvim-web-devicons"
+      },
+      config = function()
+        require("telescope").load_extension("fzf")
+
+        local builtin = require('telescope.builtin')
+        vim.keymap.set('n', '<c-p>', builtin.find_files, { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>p', builtin.live_grep, { noremap = true, silent = true })
+        vim.keymap.set('n', '<c-b>', builtin.buffers, { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { noremap = true, silent = true })
+      end
     },
-    {'nvim-telescope/telescope-fzf-native.nvim', build = function() vim.fn['make']() end},
     {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
     'neovim/nvim-lspconfig',
     {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup{} end },
@@ -155,13 +168,6 @@ vim.api.nvim_set_keymap('n', '<C-[>', ':-tabmove<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-]>', ':+tabmove<cr>', { noremap = true })
 
 
-
--- Telescope --------------------------------------
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<c-p>', builtin.find_files, { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>p', builtin.live_grep, { noremap = true, silent = true })
-vim.keymap.set('n', '<c-b>', builtin.buffers, { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { noremap = true, silent = true })
 
 -- LSP ---------------------------------------------
 local opts = { noremap = true, silent = true }
