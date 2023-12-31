@@ -254,11 +254,16 @@ vim.keymap.set('n', 'E', '$', { noremap = true })
 vim.keymap.set('v', 'E', '$', { noremap = true })
 vim.keymap.set('o', 'E', '$', { noremap = true })
 
+-- moving between buffers
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
+
+
+-- ESC key in terminal, remove ESC keybinding in normal
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
+vim.keymap.set('n', '<Esc>', '<Nop>', { noremap = true })
 
 vim.keymap.set('n', '<space>', '<Nop>', { noremap = true })
 vim.keymap.set('n', '<c-space>', '<Nop>', { noremap = true })
