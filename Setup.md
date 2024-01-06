@@ -48,10 +48,6 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
 - Install Ripgrep
 
-- Install Kitty (Terminal):
-
-Add config file (kitty.conf) to ~/.config/kitty/
-
 
 # Editor
 Setup Nvim
@@ -63,15 +59,18 @@ Put somewhere ( ex: ~/ ), create symbolink in /usr/bin/nvim by:
 ln -s ~/nvim.appimage /usr/bin/nvim
 ```
 
-Install Vim Plug:
-
 Create config folder in ~/.config/nvim by: 
 ```
 mkdir -p ~/.config/nvim
 ```
 
-Copy this **init.vim** to above folder
-
-Run :PlugInstall the first time
+Copy this **init.lua** to above folder
 
 Install Language Server
+
+# Terminal
+Setup Kitty
+
+Add config file (kitty.conf) to ~/.config/kitty/
+
+Install kitty scrollback: https://github.com/mikesmithgh/kitty-scrollback.nvim
