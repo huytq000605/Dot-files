@@ -58,26 +58,26 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Lazy.nvim Initialization
 plugins = {
-    -- VSCode extension check
-    -- {'asvetliakov/vim-easymotion'},
-    {'shaunsingh/moonlight.nvim', config = function() 
-        -- Set colorscheme
-        vim.cmd('colorscheme moonlight')
-      end
-    },
-    {'nvim-tree/nvim-tree.lua', 
-      version = "*", 
-      lazy = false, 
-      dependencies = {"nvim-tree/nvim-web-devicons"},
-      config = function()
-        require("nvim-tree").setup {
-          view = {
-            relativenumber = true
-          }
+  {'shaunsingh/moonlight.nvim', 
+    config = function() 
+      -- Set colorscheme
+      vim.cmd('colorscheme moonlight')
+    end
+  },
+  {'nvim-tree/nvim-tree.lua', 
+    version = "*", 
+    lazy = false, 
+    dependencies = {"nvim-tree/nvim-web-devicons"},
+    config = function()
+      require("nvim-tree").setup {
+        view = {
+          relativenumber = true
         }
-      end
-    },
-    {'phaazon/hop.nvim', config = function() 
+      }
+    end
+  },
+  {'phaazon/hop.nvim', 
+    config = function() 
       require("hop").setup({
         keys = 'abcdefghijklmnopqrstuvwxyz'
       })
@@ -85,148 +85,164 @@ plugins = {
         require("hop").hint_char1({})
       end, {})
     end
+  },
+  {'nvim-telescope/telescope.nvim', 
+    dependencies = { 
+      "nvim-lua/plenary.nvim",
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      "nvim-tree/nvim-web-devicons"
     },
-    { 'nvim-telescope/telescope.nvim', 
-      dependencies = { 
-        "nvim-lua/plenary.nvim",
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-        "nvim-tree/nvim-web-devicons"
-      },
-      config = function()
-        require("telescope").load_extension("fzf")
+    config = function()
+      require("telescope").load_extension("fzf")
 
-        local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<c-p>', builtin.find_files, { noremap = true, silent = true })
-        vim.keymap.set('n', '<leader>p', builtin.live_grep, { noremap = true, silent = true })
-        vim.keymap.set('n', '<c-b>', builtin.buffers, { noremap = true, silent = true })
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { noremap = true, silent = true })
-      end
-    },
-    {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-    { 'neovim/nvim-lspconfig',
-      dependencies = {
-        "hrsh7th/cmp-nvim-lsp"
-      },
-      config = function() 
-        local opts = { noremap = true, silent = true }
-
-        -- used to enable autocompletion (assign to every lsp server config)
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-        -- Disable ctrl space in insert mode
-        vim.keymap.set('i', '<c-space>', "<Nop>", bufopts)
-
-        -- Use an on_attach function to only map the following keys
-        -- after the language server attaches to the current buffer
-        local on_attach = function(client, bufnr)
-
-          -- Mappings
-          local bufopts = { noremap = true, silent = true, buffer = bufnr }
-          bufopts.desc = "Go to declaration"
-          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-
-          bufopts.desc = "Show definitions"
-          vim.keymap.set('n', 'gd', "<cmd>Telescope lsp_definitions<CR>", bufopts)
-
-          -- bufopts.desc = "Hover"
-          vim.keymap.set('n', '<c-space>', vim.lsp.buf.hover, bufopts)
-
-
-          -- bufopts.desc = "Show implementations"
-          -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-          vim.keymap.set('n', 'gi', "<cmd>Telescope lsp_implementations<CR>", bufopts)
-
-          bufopts.desc = "Show LSP references"
-          vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
-
-          vim.keymap.set('n', '<space>f', function() 
-            vim.lsp.buf.format { async = true }
-          end, bufopts)
-        end
-
-        -- Use a loop to conveniently call 'setup' on multiple servers and
-        -- map buffer local keybindings when the language server attaches
-        local servers = {"gopls", "pyright"}
-        for _, lsp in ipairs(servers) do
-          require('lspconfig')[lsp].setup {
-            on_attach = on_attach,
-            capabilities = capabilities
-          }
-        end
-
-
-        -- Highlight function in Golang
-        vim.g.go_highlight_functions = 1
-        vim.g.go_highlight_function_calls = 1
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<c-p>', builtin.find_files, { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>p', builtin.live_grep, { noremap = true, silent = true })
+      vim.keymap.set('n', '<c-b>', builtin.buffers, { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { noremap = true, silent = true })
     end
+  },
+  {'nvim-treesitter/nvim-treesitter', 
+    build = ':TSUpdate', 
+    config = function()
+      -- Key mappings for Nvim Tree
+      vim.keymap.set('n', '<C-q>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
+      -- Uncomment the following lines if you need more Nvim Tree key mappings
+      -- vim.keymap.set('n', '<leader>n', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
+    end
+  },
+  {'neovim/nvim-lspconfig',
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp"
     },
-    {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup{} end },
-    {"hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      dependencies = {
-        "hrsh7th/cmp-buffer", -- source for text in buffer
-        "hrsh7th/cmp-path", -- source for file system paths
-        "L3MON4D3/LuaSnip", -- snippet engine
-        "saadparwaiz1/cmp_luasnip", -- for autocompletion
-        "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim", -- vs-code like pictograms
-      },
-      config = function()
-        local cmp = require("cmp")
+    config = function() 
+      local opts = { noremap = true, silent = true }
 
-        local luasnip = require("luasnip")
+      -- used to enable autocompletion (assign to every lsp server config)
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-        local lspkind = require("lspkind")
+      -- Disable ctrl space in insert mode
+      vim.keymap.set('i', '<c-space>', "<Nop>", bufopts)
 
-        -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-        require("luasnip.loaders.from_vscode").lazy_load()
+      -- Use an on_attach function to only map the following keys
+      -- after the language server attaches to the current buffer
+      local on_attach = function(client, bufnr)
 
-        vim.keymap.set('i', '<Nop>', vim.lsp.buf.hover, bufopts)
+        -- Mappings
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        bufopts.desc = "Go to declaration"
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+
+        bufopts.desc = "Show definitions"
+        vim.keymap.set('n', 'gd', "<cmd>Telescope lsp_definitions<CR>", bufopts)
+
+        -- bufopts.desc = "Hover"
+        vim.keymap.set('n', '<c-space>', vim.lsp.buf.hover, bufopts)
 
 
-        cmp.setup({
-          completion = {
-            completeopt = "menu,menuone,preview,noselect",
-          },
-          snippet = { -- configure how nvim-cmp interacts with snippet engine
-            expand = function(args)
-              luasnip.lsp_expand(args.body)
-            end,
-          },
-          mapping = cmp.mapping.preset.insert({
-            ["<s-tab>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-            ["<tab>"] = cmp.mapping.select_next_item(), -- next suggestion
-            -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-            -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            -- ["<C-space>"] = cmp.mapping.complete(), -- show completion suggestions
-            -- ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-            ["<CR>"] = cmp.mapping.confirm({ select = false }),
-          }),
-          -- sources for autocompletion
-          sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "luasnip" }, -- snippets
-            { name = "buffer" }, -- text within current buffer
-            { name = "path" }, -- file system paths
-          }),
-          -- configure lspkind for vs-code like pictograms in completion menu
-          formatting = {
-            format = lspkind.cmp_format({
-              -- maxwidth = 50,
-              ellipsis_char = "...",
-            }),
-          },
-        })
+        -- bufopts.desc = "Show implementations"
+        -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+        vim.keymap.set('n', 'gi', "<cmd>Telescope lsp_implementations<CR>", bufopts)
+
+        bufopts.desc = "Show LSP references"
+        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+
+        vim.keymap.set('n', '<space>f', function() 
+          vim.lsp.buf.format { async = true }
+        end, bufopts)
       end
-    }
+
+      -- Use a loop to conveniently call 'setup' on multiple servers and
+      -- map buffer local keybindings when the language server attaches
+      local servers = {"gopls", "pyright"}
+      for _, lsp in ipairs(servers) do
+        require('lspconfig')[lsp].setup {
+          on_attach = on_attach,
+          capabilities = capabilities
+        }
+      end
+
+
+      -- Highlight function in Golang
+      vim.g.go_highlight_functions = 1
+      vim.g.go_highlight_function_calls = 1
+    end
+  },
+  {'windwp/nvim-autopairs', 
+    config = function() require("nvim-autopairs").setup{} end 
+  },
+  {"hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-buffer", -- source for text in buffer
+      "hrsh7th/cmp-path", -- source for file system paths
+      "L3MON4D3/LuaSnip", -- snippet engine
+      "saadparwaiz1/cmp_luasnip", -- for autocompletion
+      "rafamadriz/friendly-snippets", -- useful snippets
+      "onsails/lspkind.nvim", -- vs-code like pictograms
+    },
+    config = function()
+      local cmp = require("cmp")
+
+      local luasnip = require("luasnip")
+
+      local lspkind = require("lspkind")
+
+      -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+      require("luasnip.loaders.from_vscode").lazy_load()
+
+      vim.keymap.set('i', '<Nop>', vim.lsp.buf.hover, bufopts)
+
+
+      cmp.setup({
+        completion = {
+          completeopt = "menu,menuone,preview,noselect",
+        },
+        snippet = { -- configure how nvim-cmp interacts with snippet engine
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<s-tab>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+          ["<tab>"] = cmp.mapping.select_next_item(), -- next suggestion
+          -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          -- ["<C-space>"] = cmp.mapping.complete(), -- show completion suggestions
+          -- ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        }),
+        -- sources for autocompletion
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" }, -- snippets
+          { name = "buffer" }, -- text within current buffer
+          { name = "path" }, -- file system paths
+        }),
+        -- configure lspkind for vs-code like pictograms in completion menu
+        formatting = {
+          format = lspkind.cmp_format({
+            -- maxwidth = 50,
+            ellipsis_char = "...",
+          }),
+        },
+      })
+    end
+  },
+  {'mikesmithgh/kitty-scrollback.nvim',
+    enabled = true,
+    lazy = true,
+    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
+    event = { 'User KittyScrollbackLaunch' },
+    -- version = '*', -- latest stable version, may have breaking changes if major version changed
+    -- version = '^3.0.0', -- pin major version, include fixes and features that do not have breaking changes
+    config = function()
+      require('kitty-scrollback').setup()
+    end
+  }
 }
 require("lazy").setup(plugins)
-
--- Key mappings for Nvim Tree
-vim.keymap.set('n', '<C-q>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
--- Uncomment the following lines if you need more Nvim Tree key mappings
--- vim.keymap.set('n', '<leader>n', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
 
 
 -- Key mapping
@@ -269,8 +285,6 @@ vim.keymap.set('n', '<space>', '<Nop>', { noremap = true })
 vim.keymap.set('n', '<c-space>', '<Nop>', { noremap = true })
 vim.keymap.set('n', '<C-[>', ':-tabmove<cr>', { noremap = true })
 vim.keymap.set('n', '<C-]>', ':+tabmove<cr>', { noremap = true })
-
-
 
 -- If using WSL, download win32yank and put it in the directory, then use these configs to sync buffer
 -- local win32yank = '/usr/local/bin/win32yank.exe'
