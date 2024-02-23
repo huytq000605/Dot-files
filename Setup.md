@@ -12,6 +12,9 @@ Copy a screenshot of an area to clipboard : Super + Shift + S
 Move to Work Space Above / Below : Disabled
 
 Universal Access => Typing => Repeat Keys
+- WSL: `apt-get install x11-xserver-utils` -> `xset r rate 240 40`
+  - 240 - is a milliseconds delay before repeating starts
+  - 40 - the rate of repetition after the delay
 
 Vietnamese: Ibamboo
 
