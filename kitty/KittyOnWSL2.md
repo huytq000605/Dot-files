@@ -65,6 +65,7 @@ cmd /c "PATH_TO_BAT_FILE"
 8. There might be issues, references:
 - https://github.com/microsoft/WSL/issues/7915
 - https://www.unixtutorial.org/how-to-install-ttf-fonts-in-linux/
+- https://gitlab.freedesktop.org/mesa/mesa/-/issues/7584
 - Install fonts inside Linux by downloading TTF file and put into shared font folder (fc-list) and fc-cache -f -v
 9. Enjoy !!!
 
