@@ -67,6 +67,13 @@ cmd /c "PATH_TO_BAT_FILE"
 - https://www.unixtutorial.org/how-to-install-ttf-fonts-in-linux/
 - https://gitlab.freedesktop.org/mesa/mesa/-/issues/7584
 - Install fonts inside Linux by downloading TTF file and put into shared font folder (fc-list) and fc-cache -f -v
+- Disable WSLg to be able to run VcXsrc by
+    - https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig
+    - Create `.wslconfig` in %UserProfile% (C:\Users\<username>)
+```
+[wsl2]
+guiApplications=false
+```
 9. Enjoy !!!
 
 
