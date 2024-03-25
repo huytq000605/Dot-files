@@ -148,6 +148,9 @@ npm() {
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 
+# use vim/neovim as manpager
+export MANPAGER="nvim +Man!"
+
 ### GOPATH
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
