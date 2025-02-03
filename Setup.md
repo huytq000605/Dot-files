@@ -34,6 +34,7 @@ Gnome-tweaks
 ``` bash
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 12
+defaults write -g ApplePressAndHoldEnabled -bool false
 ```
 ![](assets/mac_os_keyboard.png)
 ![](assets/shortcut.png)
