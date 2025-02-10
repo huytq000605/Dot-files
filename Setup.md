@@ -78,3 +78,9 @@ Setup Kitty
 Add config file (kitty.conf) to ~/.config/kitty/
 
 Install kitty scrollback: https://github.com/mikesmithgh/kitty-scrollback.nvim
+
+# Snipaste
+https://www.snipaste.com/download.html
+
+# Clipboard Manager
+https://maccy.app/
